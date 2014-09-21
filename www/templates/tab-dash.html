@@ -1,0 +1,149 @@
+<ion-view  title="Dashboard">
+    <ion-header-bar  class="bar-positive">
+            <button class="button button-icon icon ion-ios7-minus-outline" 
+                    ng-click="data.showDelete = !data.showDelete;
+                        data.showReorder = false"></button>
+         <h1  class="title"> <i ng-click="prevMonth()" class="icon ion-chevron-left"  ></i> {{numberMonth}}<span>/</span>{{numberYear}} <i ng-click="nextMonth()"  class="icon ion-chevron-right"></i></h1>
+        <button class="button button-icon icon ion-ios7-plus" 
+                    ng-click="edit()"></button>
+
+    </ion-header-bar>
+    <ion-content contenth height="150" class="content-scroll">    
+        <ion-list  show-delete="data.showDelete" canSwipeItems="true">
+            <div class="card">
+                <div class="item item-divider">
+                    Recurring Expenses
+                </div>
+                <ion-item  class="item-icon-left item-icon-right" ng-repeat="item in model.recurring" 
+                           item="item"
+                           ng-dblclick="edit(item)">
+
+                    <i class="icon {{item.icon}}"></i>
+
+                    <p  style="float: right">
+                        {{item.value}}
+
+
+                    </p>
+                    <p style="float: left">
+                        {{ item.name}}
+                    </p>
+
+
+                    <ion-delete-button class="ion-minus-circled" 
+                                       ng-click="onItemDelete(item)">
+                    </ion-delete-button>
+                    <ion-option-button class="button-assertive"
+                                       ng-click="edit(item)">
+                        Edit
+                    </ion-option-button>
+
+                    <i ng-click="edit(item)" class="icon ion-ios7-compose"></i>
+                    <!--          <ion-option-button class="button-calm"
+                                                 ng-click="share(item)">
+                                Share
+                              </ion-option-button>-->
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                </ion-item>
+            </div>
+        </ion-list>
+        <ion-list  show-delete="data.showDelete" canSwipeItems="true">
+            <div class="card">
+                <div class="item item-divider">
+                    Fluctuating Expenses
+                </div>
+
+                <ion-item  class="item-icon-left item-icon-right" ng-repeat="item in model.fluctuating" 
+                           item="item"
+                           ng-dblclick="edit(item)">
+                    <i class="icon {{item.icon}}"></i>
+
+                    <p  style="float: right">
+                        {{item.value}}
+
+
+                    </p>
+                    <p style="float: left">
+                        {{ item.name}}
+                    </p>
+
+
+                    <ion-delete-button class="ion-minus-circled" 
+                                       ng-click="onItemDelete(item)">
+                    </ion-delete-button>
+                    <ion-option-button class="button-assertive"
+                                       ng-click="edit(item)">
+                        Edit
+                    </ion-option-button>
+
+                    <i ng-click="edit(item)" class="icon ion-ios7-compose"></i>
+                    <!--          <ion-option-button class="button-calm"
+                                                 ng-click="share(item)">
+                                Share
+                              </ion-option-button>-->
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                </ion-item>
+            </div>
+        </ion-list>
+        <div class="card">
+            <div class="item item-divider">
+                Income
+            </div>
+
+            <ion-item ng-repeat="inc in model.income"  class="item-icon-left item-icon-right" 
+                       ng-dblclick="edit(inc)">
+
+                <i class="icon {{inc.icon}}"></i>
+
+                <p  style="float: right">
+                    {{inc.value}}
+
+
+                </p>
+                <p style="float: left">
+                    {{ inc.name}}
+                </p>
+
+                <ion-option-button class="button-assertive"
+                                   ng-click="edit(inc)">
+                    Edit
+                </ion-option-button>
+
+                <i ng-click="edit(inc)" class="icon ion-ios7-compose"></i>
+
+            </ion-item>
+        </div>
+
+        </div>
+
+        </ion-list>
+
+
+        <!--        <ion-item class="item-icon-left" item="item">
+                    <i class="icon ion-social-usd" style="color:green"></i>
+                    <p style="float:left"><b>Total expenses</b></p>
+                    <p  style="float:right"><b>{{model.expTotal}}</b></p>
+                </ion-item>
+        
+        
+                <ion-item class="item-icon-left" item="item">
+                    <i class="icon ion-social-usd" style="color:green"></i>
+                    <p style="float:left"><b>Amount Left</b></p>
+                    <p  style="float:right"><b>{{model.amountLeft}}</b></p>
+                </ion-item>
+        
+                <ion-item class="item-icon-left" item="item">
+                    <i class="icon ion-social-usd" style="color:green"></i>
+                    <p style="float:left"><b>Budget per day</b></p>
+                    <p  style="float:right"><b>{{model.perDay}}</b></p>
+                </ion-item>-->
+
+
+    </ion-content>
+    <ion-footer-bar style="height:80px" class="bar-stable">
+        <button style="margin-top:35px;margin-bottom:50px" class="button  button-assertive col col-50">Expenses: $ {{model.expTotal}}</button>
+        <button style="margin-top:35px;margin-bottom:50px" class="button  button-balanced col col-50">Available: $ {{model.amountLeft}}</button>
+        <button style="height:0px;" class="button button-positive col">Daily Allowance: $ {{model.perDay|number:2}}</button>
+    </ion-footer-bar>
+
+</ion-view>
